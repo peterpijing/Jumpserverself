@@ -1,0 +1,61 @@
+{% extends "todo/base.html" %}
+{% block body %}
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                  <div class="starter-template">
+                    <h2 class="text-success"><b>Todo：</b></h2>
+                    <table class="table">
+                      {% for todo in todolist %}
+                            {% if todo.priority == '1' %}
+                                <tr class='danger'>
+                            {% endif %}
+                            {% if todo.priority == '2' %}
+                                <tr class='warning'>
+                            {% endif %}
+                            {% if todo.priority == '3' %}
+                                <tr class='success'>
+                            {% endif %}
+                                <td>{{ todo.id }}</td>
+                                <td>{{ todo.todo }}</td>
+                                <td>
+                                    <a href="{% url "finish" todo.id %}"><span class="glyphicon glyphicon-ok"></span></a>
+                                    <a href="{% url "update" todo.id %}"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a href="{% url "delete" todo.id %}"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                      {% endfor %}
+                    </table>
+                    <a href="{% url "add" %}" class="btn btn-success active">ADD</a>
+                  </div>
+            </div>
+        </div>
+
+                <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                  <div class="starter-template">
+                    <h2 class="text-success"><b>Finished：</b></h2>
+                    <table class="table">
+                      {% for todo in finishtodos %}
+                            {% if todo.priority == '1' %}
+                                <tr class='danger'>
+                            {% endif %}
+                            {% if todo.priority == '2' %}
+                                <tr class='warning'>
+                            {% endif %}
+                            {% if todo.priority == '3' %}
+                                <tr class='success'>
+                            {% endif %}
+                                <td>{{ todo.id }}</td>
+                                <td><i><S>{{ todo.todo }}</S></i></td>
+                                <td>
+                                    <a href="{% url "backout" todo.id %}"><span class="glyphicon glyphicon-repeat"></span></a>
+                                    <a href="{% url "update" todo.id %}"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a href="{% url "delete" todo.id %}"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                      {% endfor %}
+                    </table>
+                  </div>
+            </div>
+        </div>
+{% endblock %}
